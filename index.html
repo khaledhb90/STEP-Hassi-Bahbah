@@ -4,131 +4,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEP Hassi Bahbah | Suivi du projet</title>
+<title>STEP Hassi Bahbah - V2</title>
 
 <style>
 :root {
-  --blue: #123b63;
-  --light: #f1f5f9;
-  --green: #15966a;
-  --text: #243447;
+  --blue:#123b63;
+  --green:#15966a;
+  --bg:#f1f5f9;
+  --text:#243447;
+  --red:#dc3545;
 }
-
-* { box-sizing: border-box; }
-
+* {box-sizing:border-box}
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--light);
-  color: var(--text);
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-
 header {
-  background: var(--blue);
-  color: white;
-  padding: 24px 5%;
+  background:var(--blue);
+  color:white;
+  padding:25px 5%;
 }
-
-header h1 {
-  margin: 0 0 8px;
-  font-size: 25px;
-}
-
-header p {
-  margin: 0;
-  color: #d5e6f5;
-}
-
+header h1 {margin:0 0 8px;font-size:25px}
+header p {margin:0;color:#d5e6f5}
 .container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 28px 5%;
+  max-width:1250px;
+  margin:auto;
+  padding:28px 5%;
 }
-
-.section-title {
-  margin-bottom: 20px;
-  color: var(--blue);
-}
-
+h2 {color:var(--blue)}
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;
 }
-
-.card {
-  background: white;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 3px 12px #1e293b0d;
+.card,.panel {
+  background:white;
+  padding:22px;
+  border-radius:12px;
+  box-shadow:0 3px 12px #1e293b0d;
 }
-
-.card p {
-  color: #64748b;
-  margin: 0 0 12px;
-  font-size: 14px;
-}
-
-.card h2 {
-  margin: 0;
-  color: var(--blue);
-  font-size: 28px;
-}
-
+.card p {color:#64748b;margin:0 0 12px}
+.card h2 {font-size:29px;margin:0}
 .progress {
-  background: #e2e8f0;
-  height: 9px;
-  border-radius: 10px;
-  margin-top: 12px;
-  overflow: hidden;
+  height:10px;
+  background:#e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:12px;
 }
-
 .progress div {
-  height: 100%;
-  background: var(--green);
-  border-radius: 10px;
+  height:100%;
+  background:var(--green);
+  transition:width .3s;
 }
-
-.panel {
-  background: white;
-  margin-top: 28px;
-  padding: 22px;
-  border-radius: 12px;
-  overflow-x: auto;
-}
-
+.panel {margin-top:25px}
+.panel h2 {margin-top:0}
+.table-wrap {overflow-x:auto}
 table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
+  width:100%;
+  min-width:720px;
+  border-collapse:collapse;
 }
-
-th, td {
-  padding: 15px 12px;
-  text-align: left;
-  border-bottom: 1px solid #e8edf2;
+th,td {
+  padding:14px 12px;
+  text-align:left;
+  border-bottom:1px solid #e5eaf0;
 }
-
-th {
-  background: #f1f5f9;
-  color: var(--blue);
+th {background:#f1f5f9;color:var(--blue)}
+.status {color:var(--green);font-weight:bold}
+.form-grid {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:14px;
 }
-
-.status {
-  color: #087c52;
-  font-weight: bold;
+label {
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:7px;
 }
-
+input {
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:7px;
+  font-size:15px;
+}
+button {
+  border:0;
+  padding:10px 15px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:bold;
+  margin:3px;
+}
+.primary {background:var(--blue);color:white}
+.success {background:var(--green);color:white}
+.danger {background:#fee2e2;color:#b91c1c}
+.secondary {background:#e2e8f0;color:#334155}
+.actions {white-space:nowrap}
+.note {
+  color:#64748b;
+  font-size:13px;
+  line-height:1.6;
+}
 footer {
-  text-align: center;
-  padding: 24px;
-  color: #64748b;
-  font-size: 13px;
+  text-align:center;
+  padding:25px;
+  color:#64748b;
 }
-
-@media(max-width:600px) {
-  header h1 { font-size: 21px; }
-  .container { padding: 20px 4%; }
+@media(max-width:650px) {
+  .form-grid {grid-template-columns:1fr}
+  .container {padding:20px 4%}
+  header h1 {font-size:21px}
 }
 </style>
 </head>
@@ -137,97 +127,325 @@ footer {
 
 <header>
   <h1>STEP HASSI BAHBAH</h1>
-  <p>Tableau de bord - Suivi et gestion du projet</p>
+  <p>Application de suivi et de gestion du projet - Version 2.0</p>
 </header>
 
 <main class="container">
 
-  <h2 class="section-title">Vue générale du projet</h2>
+  <h2>Tableau de bord</h2>
 
   <section class="cards">
 
     <div class="card">
-      <p>Avancement global</p>
-      <h2>35 %</h2>
+      <p>Avancement global pondéré</p>
+      <h2 id="global">0 %</h2>
       <div class="progress">
-        <div style="width:35%"></div>
+        <div id="globalBar" style="width:0%"></div>
       </div>
     </div>
 
     <div class="card">
       <p>Nombre d'ouvrages</p>
-      <h2>12</h2>
+      <h2 id="total">0</h2>
     </div>
 
     <div class="card">
       <p>Travaux en cours</p>
-      <h2>08</h2>
+      <h2 id="ongoing">0</h2>
     </div>
 
     <div class="card">
       <p>Travaux achevés</p>
-      <h2>04</h2>
+      <h2 id="completed">0</h2>
     </div>
 
   </section>
 
   <section class="panel">
-    <h2 class="section-title">Suivi des ouvrages</h2>
+    <h2>Gestion des ouvrages</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>N°</th>
-          <th>Désignation des ouvrages</th>
-          <th>Avancement</th>
-          <th>État</th>
-        </tr>
-      </thead>
+    <form id="ouvrageForm">
+      <div class="form-grid">
 
-      <tbody>
-        <tr>
-          <td>01</td>
-          <td>Prétraitement</td>
-          <td>65 %</td>
-          <td class="status">En cours</td>
-        </tr>
+        <div>
+          <label for="name">Désignation de l'ouvrage</label>
+          <input id="name" required
+                 placeholder="Ex: Bassin d'aération">
+        </div>
 
-        <tr>
-          <td>02</td>
-          <td>Bassin d'aération</td>
-          <td>40 %</td>
-          <td class="status">En cours</td>
-        </tr>
+        <div>
+          <label for="progressValue">Avancement (%)</label>
+          <input id="progressValue" type="number"
+                 min="0" max="100" step="0.01"
+                 required placeholder="0 à 100">
+        </div>
 
-        <tr>
-          <td>03</td>
-          <td>Clarificateur</td>
-          <td>25 %</td>
-          <td class="status">En cours</td>
-        </tr>
+        <div>
+          <label for="weight">Pondération (%)</label>
+          <input id="weight" type="number"
+                 min="0.01" max="100" step="0.01"
+                 required placeholder="Poids">
+        </div>
 
-        <tr>
-          <td>04</td>
-          <td>Bâtiment d'exploitation</td>
-          <td>100 %</td>
-          <td class="status">Achevé</td>
-        </tr>
-      </tbody>
-    </table>
+      </div>
+
+      <p>
+        <button type="submit" class="success" id="submitBtn">
+          + Ajouter un ouvrage
+        </button>
+        <button type="button" class="secondary"
+                id="cancelBtn" hidden>
+          Annuler
+        </button>
+      </p>
+    </form>
+
+    <p class="note">
+      Le poids représente l'importance de chaque ouvrage
+      dans le calcul de l'avancement global.
+    </p>
   </section>
 
   <section class="panel">
-    <h2 class="section-title">Informations du projet</h2>
+    <h2>Suivi détaillé des ouvrages</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Désignation</th>
+            <th>Avancement</th>
+            <th>Pondération</th>
+            <th>Contribution</th>
+            <th>État</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ouvrageList"></tbody>
+      </table>
+    </div>
+
+    <p id="weightInfo" class="note"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Informations du projet</h2>
     <p><strong>Projet :</strong> Réalisation de la STEP de Hassi Bahbah</p>
     <p><strong>Type :</strong> Station d'épuration des eaux usées</p>
     <p><strong>Application :</strong> Suivi technique et gestion des travaux</p>
+    <p><strong>Version :</strong> 2.0</p>
   </section>
 
 </main>
 
 <footer>
-  STEP Hassi Bahbah - Application de suivi du projet
+  STEP Hassi Bahbah - Suivi et gestion du projet
 </footer>
+
+<script>
+const initialData = [
+  {id:1,name:"Prétraitement",progress:65,weight:30},
+  {id:2,name:"Bassin d'aération",progress:40,weight:35},
+  {id:3,name:"Clarificateur",progress:25,weight:20},
+  {id:4,name:"Bâtiment d'exploitation",progress:100,weight:15}
+];
+
+let ouvrages = [];
+let editingId = null;
+
+try {
+  const saved = localStorage.getItem("stepOuvragesV2");
+  ouvrages = saved ? JSON.parse(saved) : initialData;
+  if (!Array.isArray(ouvrages)) ouvrages = initialData;
+} catch(error) {
+  ouvrages = initialData;
+}
+
+const form = document.getElementById("ouvrageForm");
+const nameInput = document.getElementById("name");
+const progressInput = document.getElementById("progressValue");
+const weightInput = document.getElementById("weight");
+
+function saveData() {
+  localStorage.setItem("stepOuvragesV2",JSON.stringify(ouvrages));
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+function calculateGlobal() {
+  const totalWeight = ouvrages.reduce(
+    (sum,item) => sum + Number(item.weight),0
+  );
+
+  if(totalWeight === 0) return 0;
+
+  const weightedSum = ouvrages.reduce(
+    (sum,item) =>
+      sum + Number(item.progress)*Number(item.weight),0
+  );
+
+  return weightedSum / totalWeight;
+}
+
+function render() {
+  const total = ouvrages.length;
+  const completed = ouvrages.filter(
+    item => Number(item.progress) === 100
+  ).length;
+
+  const ongoing = ouvrages.filter(
+    item => Number(item.progress) < 100 &&
+            Number(item.progress) > 0
+  ).length;
+
+  const global = calculateGlobal();
+  const totalWeight = ouvrages.reduce(
+    (sum,item) => sum + Number(item.weight),0
+  );
+
+  document.getElementById("global").textContent =
+    global.toFixed(2)+" %";
+
+  document.getElementById("globalBar").style.width =
+    Math.min(global,100)+"%";
+
+  document.getElementById("total").textContent = total;
+  document.getElementById("ongoing").textContent = ongoing;
+  document.getElementById("completed").textContent = completed;
+
+  document.getElementById("weightInfo").textContent =
+    "Total des pondérations : "+totalWeight.toFixed(2)+
+    " % | Les poids sont normalisés automatiquement.";
+
+  const list = document.getElementById("ouvrageList");
+  list.innerHTML = "";
+
+  ouvrages.forEach((item,index) => {
+    const contribution =
+      Number(item.progress)*Number(item.weight)/100;
+
+    const status = Number(item.progress) === 100
+      ? "Achevé"
+      : Number(item.progress) === 0
+      ? "Non démarré"
+      : "En cours";
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${String(index+1).padStart(2,"0")}</td>
+      <td>${escapeHTML(item.name)}</td>
+      <td>${Number(item.progress).toFixed(2)} %</td>
+      <td>${Number(item.weight).toFixed(2)} %</td>
+      <td>${contribution.toFixed(2)} points</td>
+      <td class="status">${status}</td>
+      <td class="actions">
+        <button class="secondary" data-action="edit"
+                data-id="${item.id}">Modifier</button>
+        <button class="danger" data-action="delete"
+                data-id="${item.id}">Supprimer</button>
+      </td>
+    `;
+
+    list.appendChild(tr);
+  });
+}
+
+form.addEventListener("submit",function(event) {
+  event.preventDefault();
+
+  const name = nameInput.value.trim();
+  const progress = Number(progressInput.value);
+  const weight = Number(weightInput.value);
+
+  if(!name || !Number.isFinite(progress) ||
+     !Number.isFinite(weight) ||
+     progress < 0 || progress > 100 || weight <= 0) {
+    alert("Veuillez vérifier les informations saisies.");
+    return;
+  }
+
+  if(editingId !== null) {
+    const item = ouvrages.find(x => x.id === editingId);
+    if(item) {
+      item.name = name;
+      item.progress = progress;
+      item.weight = weight;
+    }
+  } else {
+    ouvrages.push({
+      id:Date.now(),
+      name:name,
+      progress:progress,
+      weight:weight
+    });
+  }
+
+  saveData();
+  resetForm();
+  render();
+});
+
+document.getElementById("ouvrageList")
+.addEventListener("click",function(event) {
+  const button = event.target.closest("button");
+  if(!button) return;
+
+  const id = Number(button.dataset.id);
+  const action = button.dataset.action;
+  const item = ouvrages.find(x => x.id === id);
+
+  if(!item) return;
+
+  if(action === "edit") {
+    editingId = id;
+    nameInput.value = item.name;
+    progressInput.value = item.progress;
+    weightInput.value = item.weight;
+
+    document.getElementById("submitBtn").textContent =
+      "Enregistrer les modifications";
+
+    document.getElementById("cancelBtn").hidden = false;
+
+    form.scrollIntoView({behavior:"smooth"});
+    nameInput.focus();
+  }
+
+  if(action === "delete") {
+    if(confirm("Voulez-vous vraiment supprimer cet ouvrage ?")) {
+      ouvrages = ouvrages.filter(x => x.id !== id);
+      saveData();
+      resetForm();
+      render();
+    }
+  }
+});
+
+function resetForm() {
+  form.reset();
+  editingId = null;
+
+  document.getElementById("submitBtn").textContent =
+    "+ Ajouter un ouvrage";
+
+  document.getElementById("cancelBtn").hidden = true;
+}
+
+document.getElementById("cancelBtn")
+.addEventListener("click",resetForm);
+
+render();
+</script>
 
 </body>
 </html>
