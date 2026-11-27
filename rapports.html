@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rapports journaliers - STEP Hassi Bahbah</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;color:#243447;font-family:Arial,sans-serif}
+header{background:#123b63;color:white;padding:25px 5%}
+header h1{margin:0 0 8px}
+header p{margin:0;color:#d5e6f5}
+main{max-width:1100px;margin:auto;padding:25px 5%}
+.panel{background:white;padding:22px;border-radius:12px;margin-bottom:22px}
+h2{color:#123b63;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+label{display:block;font-weight:bold;font-size:14px;margin-bottom:7px}
+input,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:7px;font:inherit}
+textarea{min-height:85px;resize:vertical}
+.full{grid-column:1/-1}
+button{padding:11px 17px;border:0;border-radius:7px;cursor:pointer;font-weight:bold;margin:4px}
+.primary{background:#123b63;color:white}
+.green{background:#15966a;color:white}
+.red{background:#fee2e2;color:#b91c1c}
+.gray{background:#e2e8f0;color:#334155}
+.report{border:1px solid #e2e8f0;border-radius:9px;padding:17px;margin-top:13px}
+.report h3{color:#123b63;margin:0 0 10px}
+.report p{line-height:1.6;white-space:pre-wrap}
+.muted{color:#64748b;font-size:13px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+@media print{
+ header,.form-panel,.actions,.no-print{display:none!important}
+ body{background:white}
+ main{max-width:100%;padding:0}
+ .panel{box-shadow:none;border:0}
+ .report{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>STEP HASSI BAHBAH</h1>
+<p>Gestion des rapports journaliers</p>
+</header>
+
+<main>
+<section class="panel form-panel">
+<h2>Nouveau rapport journalier</h2>
+
+<form id="reportForm" class="grid">
+
+<div>
+<label for="date">Date du rapport</label>
+<input type="date" id="date" required>
+</div>
+
+<div>
+<label for="weather">Conditions météorologiques</label>
+<input id="weather" placeholder="Ex: Ensoleillé">
+</div>
+
+<div class="full">
+<label for="works">Travaux réalisés</label>
+<textarea id="works" required placeholder="Décrire les travaux réalisés aujourd'hui..."></textarea>
+</div>
+
+<div>
+<label for="workers">Personnel présent (nombre)</label>
+<input type="number" id="workers" min="0" value="0">
+</div>
+
+<div>
+<label for="equipment">Matériel mobilisé</label>
+<input id="equipment" placeholder="Ex: 2 pelles, 1 camion...">
+</div>
+
+<div class="full">
+<label for="constraints">Contraintes et difficultés</label>
+<textarea id="constraints" placeholder="Décrire les contraintes rencontrées..."></textarea>
+</div>
+
+<div class="full">
+<label for="actions">Actions à entreprendre</label>
+<textarea id="actions" placeholder="Préciser les actions et mesures nécessaires..."></textarea>
+</div>
+
+<div class="full">
+<button class="green" type="submit">Enregistrer le rapport</button>
+<button class="gray" type="reset" id="resetBtn">Effacer</button>
+</div>
+
+</form>
+</section>
+
+<section class="panel">
+<div class="actions">
+<h2>Historique des rapports</h2>
+<button class="primary" onclick="window.print()">Imprimer / PDF</button>
+<button class="gray" onclick="exportData()">Exporter JSON</button>
+</div>
+<p class="muted" id="count">0 rapport</p>
+<div id="reports"></div>
+</section>
+
+<p class="muted no-print">
+STEP Hassi Bahbah - Suivi technique du projet
+</p>
+</main>
+
+<script>
+const KEY="stepDailyReportsV1";
+const form=document.getElementById("reportForm");
+let reports=[];
+
+try{
+ reports=JSON.parse(localStorage.getItem(KEY)||"[]");
+ if(!Array.isArray(reports))reports=[];
+}catch(e){reports=[];}
+
+document.getElementById("date").value=
+ new Date().toISOString().slice(0,10);
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function save(){
+ localStorage.setItem(KEY,JSON.stringify(reports));
+}
+
+function render(){
+ const box=document.getElementById("reports");
+ document.getElementById("count").textContent=
+ reports.length+" rapport(s) enregistré(s)";
+ box.innerHTML="";
+
+ [...reports].sort((a,b)=>b.date.localeCompare(a.date))
+ .forEach(r=>{
+ const article=document.createElement("article");
+ article.className="report";
+ article.innerHTML=`
+ <h3>Rapport du ${escapeHTML(r.date)}</h3>
+ <p><strong>Météo :</strong> ${escapeHTML(r.weather||"Non renseigné")}</p>
+ <p><strong>Travaux réalisés :</strong><br>${escapeHTML(r.works)}</p>
+ <p><strong>Personnel :</strong> ${escapeHTML(r.workers)} personnes</p>
+ <p><strong>Matériel :</strong><br>${escapeHTML(r.equipment||"Non renseigné")}</p>
+ <p><strong>Contraintes :</strong><br>${escapeHTML(r.constraints||"Aucune")}</p>
+ <p><strong>Actions :</strong><br>${escapeHTML(r.actions||"Non renseignées")}</p>
+ <div class="actions no-print">
+ <button class="red" data-delete="${r.id}">Supprimer</button>
+ </div>`;
+ box.appendChild(article);
+ });
+}
+
+form.addEventListener("submit",e=>{
+ e.preventDefault();
+
+ const report={
+ id:Date.now(),
+ date:document.getElementById("date").value,
+ weather:document.getElementById("weather").value.trim(),
+ works:document.getElementById("works").value.trim(),
+ workers:document.getElementById("workers").value,
+ equipment:document.getElementById("equipment").value.trim(),
+ constraints:document.getElementById("constraints").value.trim(),
+ actions:document.getElementById("actions").value.trim()
+ };
+
+ reports.push(report);
+ save();
+ render();
+
+ form.reset();
+ document.getElementById("date").value=
+ new Date().toISOString().slice(0,10);
+
+ alert("Rapport enregistré avec succès !");
+});
+
+document.getElementById("reports").addEventListener("click",e=>{
+ const button=e.target.closest("[data-delete]");
+ if(!button)return;
+
+ if(confirm("Supprimer ce rapport ?")){
+ reports=reports.filter(r=>String(r.id)!==button.dataset.delete);
+ save();
+ render();
+ }
+});
+
+function exportData(){
+ const blob=new Blob(
+ [JSON.stringify(reports,null,2)],
+ {type:"application/json"}
+ );
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="rapports-STEP-Hassi-Bahbah.json";
+ a.click();
+ URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>
