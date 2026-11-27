@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEP Hassi Bahbah | Suivi du projet</title>
+
+<style>
+:root {
+  --blue: #123b63;
+  --light: #f1f5f9;
+  --green: #15966a;
+  --text: #243447;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+}
+
+header {
+  background: var(--blue);
+  color: white;
+  padding: 24px 5%;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+header p {
+  margin: 0;
+  color: #d5e6f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 28px 5%;
+}
+
+.section-title {
+  margin-bottom: 20px;
+  color: var(--blue);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #1e293b0d;
+}
+
+.card p {
+  color: #64748b;
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.card h2 {
+  margin: 0;
+  color: var(--blue);
+  font-size: 28px;
+}
+
+.progress {
+  background: #e2e8f0;
+  height: 9px;
+  border-radius: 10px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.progress div {
+  height: 100%;
+  background: var(--green);
+  border-radius: 10px;
+}
+
+.panel {
+  background: white;
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+th, td {
+  padding: 15px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e8edf2;
+}
+
+th {
+  background: #f1f5f9;
+  color: var(--blue);
+}
+
+.status {
+  color: #087c52;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  header h1 { font-size: 21px; }
+  .container { padding: 20px 4%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>STEP HASSI BAHBAH</h1>
+  <p>Tableau de bord - Suivi et gestion du projet</p>
+</header>
+
+<main class="container">
+
+  <h2 class="section-title">Vue générale du projet</h2>
+
+  <section class="cards">
+
+    <div class="card">
+      <p>Avancement global</p>
+      <h2>35 %</h2>
+      <div class="progress">
+        <div style="width:35%"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p>Nombre d'ouvrages</p>
+      <h2>12</h2>
+    </div>
+
+    <div class="card">
+      <p>Travaux en cours</p>
+      <h2>08</h2>
+    </div>
+
+    <div class="card">
+      <p>Travaux achevés</p>
+      <h2>04</h2>
+    </div>
+
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">Suivi des ouvrages</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Désignation des ouvrages</th>
+          <th>Avancement</th>
+          <th>État</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Prétraitement</td>
+          <td>65 %</td>
+          <td class="status">En cours</td>
+        </tr>
+
+        <tr>
+          <td>02</td>
+          <td>Bassin d'aération</td>
+          <td>40 %</td>
+          <td class="status">En cours</td>
+        </tr>
+
+        <tr>
+          <td>03</td>
+          <td>Clarificateur</td>
+          <td>25 %</td>
+          <td class="status">En cours</td>
+        </tr>
+
+        <tr>
+          <td>04</td>
+          <td>Bâtiment d'exploitation</td>
+          <td>100 %</td>
+          <td class="status">Achevé</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">Informations du projet</h2>
+    <p><strong>Projet :</strong> Réalisation de la STEP de Hassi Bahbah</p>
+    <p><strong>Type :</strong> Station d'épuration des eaux usées</p>
+    <p><strong>Application :</strong> Suivi technique et gestion des travaux</p>
+  </section>
+
+</main>
+
+<footer>
+  STEP Hassi Bahbah - Application de suivi du projet
+</footer>
+
+</body>
+</html>
